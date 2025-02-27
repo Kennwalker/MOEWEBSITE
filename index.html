@@ -3,15 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOEWEBSITE</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MOE Sports - Live Mechi</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            text-align: center;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        video {
+            width: 90%;
+            max-width: 800px;
+            border: 2px solid #fff;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
-    <h1>Karibu kwenye MOEWEBSITE</h1>
-    <p>Hii ni tovuti yangu ya kwanza GitHub Pages!</p>
+    <h1>MOE SPORTS - Live Mechi Mubashara</h1>
     
-    <!-- Onyesha Picha -->
-    <img src="IMG_7522.jpeg" alt="Picha yangu" width="300">
+    <video id="video" controls autoplay></video>
 
+    <div class="buttons">
+        <button onclick="changeStream('https://truyenhinh.vnptvas.vn/live.m3u8?c=vstv362&deviceId=&deviceType=&gcId=1532&location=NA&pkg=pkg11.hni&q=high&requestTime=1586309420781&time=1586395820&token=LX-ibJYRUq9pflRtYAxfYQ&type=tv&userId=')">Channel 1</button>
+
+        <button onclick="changeStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Channel 2</button>
+
+        <button onclick="changeStream('http://mwy2tky6.akciatv.ru/iptv/ZP6CPSLL6GVWT2/2353/index.m3u8')">Channel 3</button>
+
+        <button onclick="changeStream('http://mwy2tky6.akciatv.ru/iptv/ZP6CPSLL6GWT2/2352/index.m3u8')">Channel 4</button>
+
+        <button onclick="changeStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3437.m3u8')">Channel 5</button>
+    </div>
+
+    <script>
+        var video = document.getElementById('video');
+        var hls = new Hls();
+
+        function changeStream(src) {
+            if (Hls.isSupported()) {
+                hls.loadSource(src);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = src;
+                video.play();
+            }
+        }
+
+        // Anza na channel ya kwanza
+        changeStream('https://truyenhinh.vnptvas.vn/live.m3u8?c=vstv362&deviceId=&deviceType=&gcId=1532&location=NA&pkg=pkg11.hni&q=high&requestTime=1586309420781&time=1586395820&token=LX-ibJYRUq9pflRtYAxfYQ&type=tv&userId=');
+    </script>
 </body>
 </html>
