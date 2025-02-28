@@ -18,29 +18,44 @@
             height: 450px;
             background: black;
         }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
 
     <h1>MOE SPORTS LIVE</h1>
+
+    <button onclick="loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Chanel 1</button>
+    <button onclick="loadStream('https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8')">Chanel 2</button>
+    <button onclick="loadStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Chanel 3</button>
+    
     <video id="video" controls autoplay></video>
 
     <script>
-        var video = document.getElementById('video');
-        var streamURL = "https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8";
-
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(streamURL);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        function loadStream(url) {
+            var video = document.getElementById('video');
+            
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
                 video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamURL;
-            video.play();
-        } else {
-            alert("Kichezaji hiki hakiungi mkono stream hii.");
+            } else {
+                alert("Kichezaji hiki hakiungi mkono stream hii.");
+            }
         }
     </script>
 
