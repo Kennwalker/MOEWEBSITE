@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live TV Player</title>
+    <title>MOE SPORTS LIVE</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
@@ -18,48 +18,29 @@
             height: 450px;
             background: black;
         }
-        input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
 
     <h1>MOE SPORTS LIVE</h1>
-    <input type="text" id="streamURL" placeholder="Weka Link ya Mpira Hapa">
-    <button onclick="loadStream()">Cheza</button>
-    
-    <video id="video" controls></video>
+    <video id="video" controls autoplay></video>
 
     <script>
-        function loadStream() {
-            var video = document.getElementById('video');
-            var streamURL = document.getElementById('streamURL').value;
-            
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(streamURL);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = streamURL;
+        var video = document.getElementById('video');
+        var streamURL = "https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8";
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(streamURL);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
-            } else {
-                alert("Kichezaji hiki hakiungi mkono stream hii.");
-            }
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = streamURL;
+            video.play();
+        } else {
+            alert("Kichezaji hiki hakiungi mkono stream hii.");
         }
     </script>
 
