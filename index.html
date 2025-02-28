@@ -9,34 +9,54 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000;
+            background-color: #0A0A0A;
             color: white;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: red;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
         }
         video {
-            width: 90%;
-            max-width: 800px;
-            height: 450px;
+            width: 95%;
+            max-width: 900px;
+            height: auto;
+            border: 3px solid red;
+            border-radius: 10px;
             background: black;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 15px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 20px;
+            font-size: 18px;
             background-color: red;
             color: white;
             border: none;
             cursor: pointer;
             margin: 5px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: darkred;
         }
     </style>
 </head>
 <body>
 
-    <h1>MOE SPORTS LIVE</h1>
+    <header>⚽ MOE SPORTS LIVE ⚽</header>
 
-    <button onclick="loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
-    <button onclick="loadStream('https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8')">Chanel 2</button>
-    <button onclick="loadStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Chanel 3</button>
-    
+    <div class="buttons">
+        <button onclick="loadStream('https://dffgtrde.vffddd.online:443/bein1/tracks-v1a1/mono.ts.m3u8')">Bein Sports 1</button>
+        <button onclick="loadStream('https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8')">Chanel 2</button>
+        <button onclick="loadStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Chanel 3</button>
+    </div>
+
     <video id="video" controls autoplay></video>
 
     <script>
@@ -58,9 +78,9 @@
             }
         }
 
-        // Auto-load Chanel 1 (Bein Sports 1) wakati page inafunguliwa
+        // Auto-load Bein Sports 1 wakati page inafunguliwa
         window.onload = function() {
-            loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8');
+            loadStream('https://dffgtrde.vffddd.online:443/bein1/tracks-v1a1/mono.ts.m3u8');
         };
     </script>
 
