@@ -33,7 +33,7 @@
 
     <h1>MOE SPORTS LIVE</h1>
 
-    <button onclick="loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Chanel 1</button>
+    <button onclick="loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
     <button onclick="loadStream('https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8')">Chanel 2</button>
     <button onclick="loadStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Chanel 3</button>
     
@@ -57,6 +57,11 @@
                 alert("Kichezaji hiki hakiungi mkono stream hii.");
             }
         }
+
+        // Auto-load Chanel 1 (Bein Sports 1) wakati page inafunguliwa
+        window.onload = function() {
+            loadStream('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8');
+        };
     </script>
 
 </body>
