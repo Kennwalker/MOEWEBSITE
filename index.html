@@ -1,87 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sw">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOE SPORTS LIVE</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>⚽ MOE SPORTS LIVE ⚽</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #0A0A0A;
+            background-color: black;
             color: white;
-            margin: 0;
-            padding: 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
         }
-        header {
+        h1 {
             background: red;
-            padding: 15px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        video {
-            width: 95%;
-            max-width: 900px;
-            height: auto;
-            border: 3px solid red;
+            padding: 10px;
             border-radius: 10px;
-            background: black;
+            display: inline-block;
             margin-top: 20px;
         }
-        .buttons {
-            margin-top: 15px;
+        video {
+            width: 90%;
+            height: 250px;
+            border: 3px solid red;
+            border-radius: 10px;
+            margin-top: 20px;
         }
-        button {
-            padding: 12px 20px;
-            font-size: 18px;
-            background-color: red;
+        .btn {
+            background: red;
             color: white;
+            padding: 10px;
+            margin: 5px;
             border: none;
             cursor: pointer;
-            margin: 5px;
+            font-size: 18px;
             border-radius: 5px;
         }
-        button:hover {
-            background-color: darkred;
+        .btn:hover {
+            background: darkred;
         }
     </style>
 </head>
 <body>
 
-    <header>⚽ MOE SPORTS LIVE ⚽</header>
+    <h1>⚽ MOE SPORTS LIVE ⚽</h1>
 
-    <div class="buttons">
-        <button onclick="loadStream('https://dffgtrde.vffddd.online:443/bein1/tracks-v1a1/mono.ts.m3u8')">Bein Sports 1</button>
-        <button onclick="loadStream('https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8')">Chanel 2</button>
-        <button onclick="loadStream('http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8')">Chanel 3</button>
-    </div>
+    <video id="player" controls autoplay>
+        <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
+        Browser yako haiungi mkono video hii.
+    </video>
 
-    <video id="video" controls autoplay></video>
+    <br><br>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein2/index.m3u8')">Bein Sports 2</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein3/index.m3u8')">Bein Sports 3</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein5/index.m3u8')">Bein Sports 5</button>
+    <button class="btn" onclick="changeChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</button>
 
     <script>
-        function loadStream(url) {
-            var video = document.getElementById('video');
-            
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.play();
-            } else {
-                alert("Kichezaji hiki hakiungi mkono stream hii.");
-            }
+        function changeChannel(url) {
+            document.getElementById('videoSource').src = url;
+            document.getElementById('player').load();
         }
-
-        // Auto-load Bein Sports 1 wakati page inafunguliwa
-        window.onload = function() {
-            loadStream('https://dffgtrde.vffddd.online:443/bein1/tracks-v1a1/mono.ts.m3u8');
-        };
     </script>
 
 </body>
