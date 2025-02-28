@@ -1,79 +1,65 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOE SPORTS - Live Mechi Mubashara</title>
+    <title>Live TV Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
-            background-color: black;
-            color: white;
-            text-align: center;
             font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: #ffcc00;
+            text-align: center;
+            background-color: #000;
+            color: white;
         }
         video {
+            width: 90%;
+            max-width: 800px;
+            height: 450px;
+            background: black;
+        }
+        input {
             width: 80%;
-            height: 400px;
-            background: #000;
-        }
-        .warning {
-            color: yellow;
+            padding: 10px;
+            margin: 10px 0;
             font-size: 16px;
-            margin-top: 10px;
         }
-        .channel-btn {
-            display: inline-block;
-            margin: 10px;
+        button {
             padding: 10px 20px;
+            font-size: 16px;
             background-color: red;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        .channel-btn:hover {
-            background-color: darkred;
         }
     </style>
 </head>
 <body>
 
-    <h1>MOE SPORTS - Live Mechi Mubashara</h1>
+    <h1>MOE SPORTS LIVE</h1>
+    <input type="text" id="streamURL" placeholder="Weka Link ya Mpira Hapa">
+    <button onclick="loadStream()">Cheza</button>
     
-    <video id="livePlayer" controls autoplay>
-        <source id="streamSource" src="https://truyenhinh.vnptvas.vn/live.m3u8?c=vstv362&deviceId=&deviceType=&gcId=1532&location=NA&pkg=pkg11.hni&q=high&requestTime=1586309420781&time=1586395820&token=LX-ibJYRUq9pflRtYAxfYQ&type=tv&userId=" type="application/x-mpegURL">
-        Browser yako haiwezi kucheza video hii!
-    </video>
-
-    <p class="warning">⚠️ Channel haipatikani kwa sasa. Tafadhali jaribu nyingine!</p>
-
-    <button class="channel-btn" onclick="changeChannel(1)">Channel 1</button>
-    <button class="channel-btn" onclick="changeChannel(2)">Channel 2</button>
-    <button class="channel-btn" onclick="changeChannel(3)">Channel 3</button>
-    <button class="channel-btn" onclick="changeChannel(4)">Channel 4</button>
-    <button class="channel-btn" onclick="changeChannel(5)">Channel 5</button>
-    <button class="channel-btn" onclick="changeChannel(6)">Channel 6 (Mpya)</button>
+    <video id="video" controls></video>
 
     <script>
-        function changeChannel(channel) {
-            var player = document.getElementById("streamSource");
-
-            var streams = {
-                1: "https://truyenhinh.vnptvas.vn/live.m3u8?c=vstv362&deviceId=&deviceType=&gcId=1532&location=NA&pkg=pkg11.hni&q=high&requestTime=1586309420781&time=1586395820&token=LX-ibJYRUq9pflRtYAxfYQ&type=tv&userId=",
-                2: "http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3062.m3u8",
-                3: "http://mwy2tky6.akciatv.ru/iptv/ZP6CPSLL6GVWT2/2353/index.m3u8",
-                4: "http://mwy2tky6.akciatv.ru/iptv/ZP6CPSLL6GWT2/2352/index.m3u8",
-                5: "http://ugeen.live:8080/live/kaicer_VIPg85r6f/7l9cbx/3437.m3u8",
-                6: "https://tvsw5-hls.secdn.net/tvsw5-chorigin/play/prod-8ce1fcb47fa7474d84640eb766f0ef38/playlist.m3u8"
-            };
-
-            player.src = streams[channel];
-            document.getElementById("livePlayer").load();
-            document.getElementById("livePlayer").play();
+        function loadStream() {
+            var video = document.getElementById('video');
+            var streamURL = document.getElementById('streamURL').value;
+            
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(streamURL);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamURL;
+                video.play();
+            } else {
+                alert("Kichezaji hiki hakiungi mkono stream hii.");
+            }
         }
     </script>
 
