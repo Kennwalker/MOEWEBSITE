@@ -14,7 +14,21 @@ Karibu kwenye **MOE SPORTS LIVE** – tovuti bora ya kutazama mechi za mpira wa 
 3. Furahia mechi mubashara bila kikomo!
 
 ## 📞 Mawasiliano
-📌 **WhatsApp:** [Bonyeza hapa](https://wa.me/message/HEYNTN2KD6K7O1)  
+📌 **WhatsApp:**  
+<a href="https://wa.me/message/HEYNTN2KD6K7O1" target="_blank">
+  <button style="
+  background-color: #25D366;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;">
+    📲 WhatsApp
+  </button>
+</a>
+
 📌 **Email:** moehafsathy@myyahoo.com  
 
 🚀 **MOE SPORTS LIVE – Burudani ya Mpira Mubashara!** ⚽🔥  
