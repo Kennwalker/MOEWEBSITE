@@ -58,7 +58,10 @@
 
     <h1>⚽ MOE SPORTS LIVE ⚽</h1>
 
-    <video id="player" controls autoplay></video>
+    <video id="player" controls autoplay>
+        <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
+        Browser yako haiungi mkono video hii.
+    </video>
 
     <div class="button-container">
         <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
@@ -69,26 +72,14 @@
         <button class="btn" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        var video = document.getElementById('player');
-        var hls = new Hls();
-
         function changeChannel(url) {
-            if (Hls.isSupported()) {
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                video.play(); // Anza kucheza mara moja
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-            }
+            const videoSource = document.getElementById('videoSource');
+            videoSource.src = url;
+            const player = document.getElementById('player');
+            player.load();
+            player.play(); // Anza kucheza mara moja baada ya kubadilisha channel
         }
-
-        // Anza na channel ya kwanza
-        changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8');
     </script>
 
 </body>
