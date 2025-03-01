@@ -20,23 +20,13 @@
             display: inline-block;
             margin-top: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
         }
-        .marquee {
-            position: absolute;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            animation: marquee 10s linear infinite;
-            top: 0;
-            left: 0;
-            font-size: 24px; /* Saizi ya maandiko */
-            color: yellow; /* Rangi ya maandiko */
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .marquee-container {
+            background: orange;
+            color: yellow;
+            font-size: 20px;
+            padding: 10px;
+            font-weight: bold;
         }
         video {
             width: 90%;
@@ -69,16 +59,24 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .contact-container {
+            margin-top: 20px;
+        }
+        .whatsapp-btn {
+            background: green;
+        }
+        .email-btn {
+            background: blue;
+        }
     </style>
 </head>
 <body>
 
-    <h1>
-        ⚽ MOE SPORTS LIVE ⚽
-        <div class="marquee">WhatsApp: +1(213)606-1765</div>
-    </h1>
+    <div class="marquee-container">WhatsApp: +1(213)606-1765</div>
 
-    <video id="player" controls autoplay>
+    <h1>⚽ MOE SPORTS LIVE ⚽</h1>
+
+    <video id="player" controls autoplay muted>
         <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
         Browser yako haiungi mkono video hii.
     </video>
@@ -92,19 +90,19 @@
         <button class="btn" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
     </div>
 
+    <div class="contact-container">
+        <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="btn whatsapp-btn" target="_blank">Wasiliana WhatsApp</a>
+        <a href="mailto:moehafsathy@myyahoo.com" class="btn email-btn" target="_blank">Tuma Barua Pepe</a>
+    </div>
+
     <script>
         function changeChannel(url) {
             const videoSource = document.getElementById('videoSource');
             videoSource.src = url;
             const player = document.getElementById('player');
             player.load();
-            player.play(); // Anza kucheza mara moja baada ya kubadilisha channel
+            player.play();
         }
-        <div class="contact-container">
-    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="btn" style="background-color: green;">Wasiliana na WhatsApp</a>
-    <a href="mailto:moehafsathy@myyahoo.com" class="btn" style="background-color: blue;">Tuma Barua Pepe</a>
-</div>
-
     </script>
 
 </body>
