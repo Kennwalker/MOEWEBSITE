@@ -20,6 +20,21 @@
             display: inline-block;
             margin-top: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .marquee {
+            position: absolute;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: marquee 10s linear infinite;
+            top: 0;
+            left: 0;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         video {
             width: 90%;
@@ -52,11 +67,19 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .whatsapp {
+            margin-top: 20px;
+            font-size: 18px;
+            color: yellow;
+        }
     </style>
 </head>
 <body>
 
-    <h1>⚽ MOE SPORTS LIVE ⚽</h1>
+    <h1>
+        <div class="marquee">⚽ MOE SPORTS LIVE ⚽ | WhatsApp: +1 (213) 606-1765</div>
+    </h1>
+
 
     <video id="player" controls autoplay>
         <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
