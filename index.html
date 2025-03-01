@@ -6,37 +6,51 @@
     <title>⚽ MOE SPORTS LIVE ⚽</title>
     <style>
         body {
-            background-color: black;
-            color: white;
+            background-color: #121212;
+            color: #ffffff;
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
         h1 {
-            background: red;
-            padding: 10px;
+            background: linear-gradient(90deg, red, orange);
+            padding: 15px;
             border-radius: 10px;
             display: inline-block;
             margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         video {
             width: 90%;
-            height: 250px;
+            height: 300px;
             border: 3px solid red;
             border-radius: 10px;
             margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         .btn {
             background: red;
             color: white;
-            padding: 10px;
+            padding: 12px 20px;
             margin: 5px;
             border: none;
             cursor: pointer;
             font-size: 18px;
             border-radius: 5px;
+            transition: background 0.3s;
         }
         .btn:hover {
             background: darkred;
+        }
+        .btn:active {
+            background: crimson;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -49,17 +63,22 @@
         Browser yako haiungi mkono video hii.
     </video>
 
-    <br><br>
-    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
-    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein2/index.m3u8')">Bein Sports 2</button>
-    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein3/index.m3u8')">Bein Sports 3</button>
-    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein5/index.m3u8')">Bein Sports 5</button>
-    <button class="btn" onclick="changeChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</button>
+    <div class="button-container">
+        <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
+        <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein2/index.m3u8')">Bein Sports 2</button>
+        <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein3/index.m3u8')">Bein Sports 3</button>
+        <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein5/index.m3u8')">Bein Sports 5</button>
+        <button class="btn" onclick="changeChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</button>
+        <button class="btn" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
+    </div>
 
     <script>
         function changeChannel(url) {
-            document.getElementById('videoSource').src = url;
-            document.getElementById('player').load();
+            const videoSource = document.getElementById('videoSource');
+            videoSource.src = url;
+            const player = document.getElementById('player');
+            player.load();
+            player.play(); // Anza kucheza mara moja baada ya kubadilisha channel
         }
     </script>
 
