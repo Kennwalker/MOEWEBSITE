@@ -13,22 +13,28 @@
             margin: 0;
             padding: 0;
         }
-        .marquee-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: yellow;
-            background: linear-gradient(90deg, red, orange);
-            padding: 15px;
-            border-radius: 10px;
-            display: inline-block;
+        .marquee {
             white-space: nowrap;
             overflow: hidden;
-            width: 100%;
+            display: inline-block;
             animation: marquee 10s linear infinite;
+            font-size: 28px;
+            font-weight: bold;
+            color: yellow;
         }
         @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
+        }
+        .intro {
+            margin-top: 20px;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid red;
+            box-shadow: 0 0 15px red;
         }
         video {
             width: 90%;
@@ -61,40 +67,46 @@
             justify-content: center;
             margin-top: 20px;
         }
-        .contact-container {
-            margin-top: 20px;
-        }
-        .whatsapp-btn {
-            background: green;
+        .contact-btn {
             font-size: 22px;
             font-weight: bold;
-            text-transform: uppercase;
+            padding: 15px;
+            width: 90%;
+            margin: 10px auto;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
             animation: blink 1s infinite alternate;
         }
-        .email-btn {
-            background: blue;
-            font-size: 22px;
-            font-weight: bold;
-            text-transform: uppercase;
-            animation: glow 1s infinite alternate;
+        .whatsapp {
+            background-color: green;
+            color: white;
+        }
+        .email {
+            background-color: blue;
+            color: white;
         }
         @keyframes blink {
             0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px white; }
-            50% { text-shadow: 0 0 15px yellow; }
-            100% { text-shadow: 0 0 5px white; }
+            100% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
 
-    <div class="marquee-title">⚽ MOE SPORTS LIVE ⚽</div>
+    <h1>
+        <div class="marquee">⚽ MOE SPORTS LIVE ⚽</div>
+    </h1>
 
-    <video id="player" controls autoplay muted>
+    <div class="intro">
+        <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" alt="Moe" class="profile-pic">
+        <p><strong>Karibu kwenye MOE SPORTS LIVE!</strong><br>
+        Tovuti hii imetengenezwa na <strong>Moe</strong> kwa ajili ya kutazama mechi mubashara. <br>
+        Chaneli nyingi mpya zitakuja hivi karibuni!</p>
+    </div>
+
+    <video id="player" controls autoplay>
         <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
         Browser yako haiungi mkono video hii.
     </video>
@@ -108,10 +120,8 @@
         <button class="btn" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
     </div>
 
-    <div class="contact-container">
-        <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="btn whatsapp-btn" target="_blank">WhatsApp</a>
-        <a href="mailto:moehafsathy@myyahoo.com" class="btn email-btn" target="_blank">Email</a>
-    </div>
+    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
+    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
 
     <script>
         function changeChannel(url) {
