@@ -3,31 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOE SPORTS LIVE ⚽</title>
+    <title>⚽ MOE SPORTS LIVE ⚽</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #222; color: white; }
-        .channel { margin: 10px; padding: 10px; background: #333; border-radius: 5px; cursor: pointer; }
-        iframe { width: 100%; height: 500px; margin-top: 20px; border: none; }
-    </style>
-    <script>
-        function playChannel(url) {
-            document.getElementById('player').src = url;
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
         }
-    </script>
+        h1 {
+            background: red;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        video {
+            width: 90%;
+            height: 250px;
+            border: 3px solid red;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            background: red;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: darkred;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>📺 MOE SPORTS LIVE ⚽</h1>
-    <h3>Chagua Chaneli Unayotaka Kutazama</h3>
+    <h1>⚽ MOE SPORTS LIVE ⚽</h1>
 
-    <div class="channel" onclick="playChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</div>
-    <div class="channel" onclick="playChannel('https://dffgtrdb.vffddd.online:8880/bein2/index.m3u8')">Bein Sports 2</div>
-    <div class="channel" onclick="playChannel('https://dffgtrdb.vffddd.online:8880/bein3/index.m3u8')">Bein Sports 3</div>
-    <div class="channel" onclick="playChannel('https://dffgtrdb.vffddd.online:8880/bein5/index.m3u8')">Bein Sports 5</div>
-    <div class="channel" onclick="playChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</div>
-    <div class="channel" onclick="playChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</div>
+    <video id="player" controls autoplay>
+        <source id="videoSource" src="https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8" type="application/x-mpegURL">
+        Browser yako haiungi mkono video hii.
+    </video>
 
-    <iframe id="player"></iframe>
+    <br><br>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein1/index.m3u8')">Bein Sports 1</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein2/index.m3u8')">Bein Sports 2</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein3/index.m3u8')">Bein Sports 3</button>
+    <button class="btn" onclick="changeChannel('https://dffgtrdb.vffddd.online:8880/bein5/index.m3u8')">Bein Sports 5</button>
+    <button class="btn" onclick="changeChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</button>
+
+    <script>
+        function changeChannel(url) {
+            document.getElementById('videoSource').src = url;
+            document.getElementById('player').load();
+        }
+    </script>
 
 </body>
 </html>
