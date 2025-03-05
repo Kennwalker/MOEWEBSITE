@@ -27,6 +27,16 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        .intro {
+            margin-top: 20px;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid red;
+            box-shadow: 0 0 15px red;
+        }
         video {
             width: 90%;
             height: 300px;
@@ -60,6 +70,12 @@
         .btn-right:hover {
             background: darkgreen;
         }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
         .contact-btn {
             font-size: 22px;
             font-weight: bold;
@@ -88,68 +104,54 @@
 </head>
 <body>
 
-    <h1><div class="marquee">⚽ MOE WEBSITE SPORTS LIVE ⚽</div></h1>
+    <h1>
+        <div class="marquee">⚽ MOE WEBSITE SPORTS LIVE ⚽</div>
+    </h1>
+
+    <div class="intro">
+        <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" alt="Moe" class="profile-pic">
+        <p><strong>Karibu kwenye MOE SPORTS LIVE!</strong><br>
+        Tovuti hii imetengenezwa na <strong>Moe</strong> kwa ajili ya kutazama mechi mubashara. <br>
+        Chaneli nyingi mpya zitakuja hivi karibuni!</p>
+    </div>
 
     <video id="player" controls autoplay></video>
 
-    <div>
-        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/23')">Bein Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/26534')">Bein Sports 2</button>
-        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/26535')">Bein Sports 3</button>
-        <button class="btn btn-right" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/26536')">Bein Sports 4</button>
-        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/26537')">Bein Sports 5</button>
-        <button class="btn btn-right" onclick="changeChannel('http://tera10.org:8880/215605783390/atHCKpDAPE/125550')">Bein Sports 6</button>
-        <button class="btn btn-left" onclick="changeChannel('http://125.209.88.166:45793/BRN/TenSports.stream/playlist.m3u8')">Ten Sports</button>
-        <button class="btn btn-right" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
-        <button class="btn btn-left" onclick="changeChannel('http://bdd78.4rouwanda-shop.store/live/69854211/index.m3u8')">SSC Sport</button>
-        <button class="btn btn-right" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">PS Stream</button>
-        <button class="btn btn-left" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1 HD</button>
+    <div class="button-container">
+        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/71')">Bein Sports 1</button>
+        <button class="btn btn-right" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/72')">Bein Sports 2</button>
+        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/73')">Bein Sports 3</button>
+        <button class="btn btn-right" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/74')">Bein Sports 4</button>
+        <button class="btn btn-left" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/75')">Bein Sports 5</button>
+        <button class="btn btn-right" onclick="changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/76')">Bein Sports 6</button>
+        <button class="btn btn-left" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
+        <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
     </div>
 
     <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
     <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
 
     <script>
-        function playStream(url) {
+        function changeChannel(url) {
             var video = document.getElementById('player');
-
-            // Safisha video ili uanze upya
-            video.pause();
-            video.src = "";
-            video.load();
 
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(url);
                 hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.play();
-                });
-                hls.on(Hls.Events.ERROR, function (event, data) {
-                    console.error("HLS.js Error:", data);
-                    alert("Samahani, channel haichezi. Jaribu nyingine.");
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-                video.onerror = function () {
-                    alert("Samahani, channel haichezi. Jaribu nyingine.");
-                };
+                video.play();
             } else {
-                alert("Samahani, browser yako haikubali video hizi.");
+                alert("Browser yako haiungi mkono video hii.");
             }
         }
 
-        function changeChannel(url) {
-            playStream(url);
-        }
-
-        // Load default channel on page load
-        document.addEventListener("DOMContentLoaded", function () {
-            playStream('http://magott.net:80/morad-assurance/29KQUPABHs/23');
-        });
+        // Auto-load channel ya kwanza
+        changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/71');
     </script>
 
 </body>
