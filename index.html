@@ -14,19 +14,6 @@
             margin: 0;
             padding: 0;
         }
-        .marquee {
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: marquee 10s linear infinite;
-            font-size: 28px;
-            font-weight: bold;
-            color: yellow;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
         video {
             width: 90%;
             height: 300px;
@@ -56,11 +43,20 @@
             justify-content: center;
             margin-top: 20px;
         }
+        .contact {
+            margin-top: 30px;
+            font-size: 18px;
+        }
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <h1><div class="marquee">⚽ MOE SPORTS LIVE ⚽</div></h1>
+    <h1>⚽ MOE SPORTS LIVE ⚽</h1>
 
     <video id="player" controls autoplay></video>
 
@@ -75,26 +71,32 @@
         <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
     </div>
 
+    <div class="contact">
+        <p>📧 Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+        <p>📱 WhatsApp: <a href="https://wa.me/255XXXXXXXXX">Click to Chat</a></p>
+    </div>
+
     <script>
         function changeChannel(url) {
             var video = document.getElementById('player');
+            var proxy = "https://corsproxy.io/?"; // Proxy ya kuondoa CORS restrictions
             
             if (Hls.isSupported()) {
                 var hls = new Hls();
-                hls.loadSource(url);
+                hls.loadSource(proxy + url); // Tunatumia proxy
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.play();
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
+                video.src = proxy + url; // Tunatumia proxy kwa Safari
                 video.play();
             } else {
                 alert("Browser yako haiwezi kucheza channel hii.");
             }
         }
 
-        // Play channel ya kwanza moja kwa moja
+        // Play channel ya kwanza automatically
         changeChannel('http://magott.net:80/morad-assurance/29KQUPABHs/71');
     </script>
 
