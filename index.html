@@ -60,6 +60,30 @@
         .btn-right:hover {
             background: darkgreen;
         }
+        .contact-btn {
+            font-size: 22px;
+            font-weight: bold;
+            padding: 15px;
+            width: 90%;
+            margin: 10px auto;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            animation: blink 1s infinite alternate;
+        }
+        .whatsapp {
+            background-color: green;
+            color: white;
+        }
+        .email {
+            background-color: blue;
+            color: white;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
     </style>
 </head>
 <body>
@@ -82,9 +106,17 @@
         <button class="btn btn-left" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1 HD</button>
     </div>
 
+    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
+    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
+
     <script>
         function playStream(url) {
             var video = document.getElementById('player');
+
+            // Safisha video ili uanze upya
+            video.pause();
+            video.src = "";
+            video.load();
 
             if (Hls.isSupported()) {
                 var hls = new Hls();
@@ -93,11 +125,20 @@
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     video.play();
                 });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    console.error("HLS.js Error:", data);
+                    alert("Samahani, channel haichezi. Jaribu nyingine.");
+                });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
                 video.addEventListener('loadedmetadata', function () {
                     video.play();
                 });
+                video.onerror = function () {
+                    alert("Samahani, channel haichezi. Jaribu nyingine.");
+                };
+            } else {
+                alert("Samahani, browser yako haikubali video hizi.");
             }
         }
 
