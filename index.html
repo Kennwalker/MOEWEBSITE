@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚽ MOE SPORTS LIVE ⚽</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
             background-color: #121212;
@@ -114,36 +115,50 @@
         Chaneli nyingi mpya zitakuja hivi karibuni!</p>
     </div>
 
-    <video id="player" controls autoplay>
-        <source id="videoSource" src="http://magott.net:80/morad-assurance/29KQUPABHs/23" type="application/x-mpegURL">
-        Browser yako haiungi mkono video hii.
-    </video>
+    <video id="player" controls autoplay></video>
 
     <div class="button-container">
         <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232373.m3u8')">Bein Sports 1</button>
         <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232374.m3u8')">Bein Sports 6</button>
         <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232388.m3u8')">Bein Sports 2</button>
         <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 3</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232377.m3u8')">Bein Sports 4</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232378.m3u8')">Bein Sports 5</button>
-        <button class="btn btn-left" onclick="changeChannel('https://trests.3utilities.com:8181/memfs/3a34b9cb-983f-4bc8-851e-3b0a9150b05a_output_0.m3u8?session=d7UfeoDYQDcf5zzoLwK96Z')"> ESPNSports</button>
+        <button class="btn btn-left" onclick="changeChannel('https://trests.3utilities.com:8181/memfs/3a34b9cb-983f-4bc8-851e-3b0a9150b05a_output_0.m3u8?session=d7UfeoDYQDcf5zzoLwK96Z')">ESPNSports</button>
         <button class="btn btn-right" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
-        <button class="btn btn-left" onclick="changeChannel('http://bdd78.4rouwanda-shop.store/live/69854211/index.m3u8')">SSC Sport</button>
-        <button class="btn btn-right" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">PS Stream</button>
-        <button class="btn btn-left" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1 HD</button>
+        <button class="btn btn-left" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">PS Stream</button>
+        <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1 HD</button>
     </div>
 
     <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
     <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
 
     <script>
+        var video = document.getElementById('player');
+        var hls = new Hls();
+
         function changeChannel(url) {
-            const videoSource = document.getElementById('videoSource');
-            videoSource.src = url;
-            const player = document.getElementById('player');
-            player.load();
-            player.play();
+            if (Hls.isSupported()) {
+                hls.destroy();  // Safisha stream ya zamani
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+                hls.on(Hls.Events.ERROR, function(event, data) {
+                    if (data.fatal) {
+                        alert("Tatizo katika kucheza channel. Tafadhali jaribu tena.");
+                    }
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.play();
+            } else {
+                alert("Samahani, browser yako haiwezi kucheza channel hii.");
+            }
         }
+
+        // Load default channel
+        changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232373.m3u8');
     </script>
 
 </body>
