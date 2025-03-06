@@ -3,162 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚽ MOE SPORTS LIVE ⚽</title>
+    <title>Moe streaming live VLC Online</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
             text-align: center;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .marquee {
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: marquee 10s linear infinite;
-            font-size: 28px;
-            font-weight: bold;
-            color: yellow;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .intro {
-            margin-top: 20px;
-        }
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid red;
-            box-shadow: 0 0 15px red;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
         }
         video {
             width: 90%;
-            height: 300px;
-            border: 3px solid red;
+            max-width: 800px;
             border-radius: 10px;
             margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
-        .btn {
-            padding: 12px 20px;
-            margin: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 30px; /* Oval shape */
-            transition: background 0.3s;
-            width: 200px;
-            font-weight: bold;
-        }
-        .btn-left {
-            background: white;
-            color: black;
-        }
-        .btn-left:hover {
-            background: #e0e0e0;
-        }
-        .btn-right {
-            background: green;
-            color: white;
-        }
-        .btn-right:hover {
-            background: darkgreen;
-        }
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .contact-btn {
-            font-size: 22px;
-            font-weight: bold;
-            padding: 15px;
-            width: 90%;
-            margin: 10px auto;
-            display: block;
-            text-decoration: none;
-            text-align: center;
+        input, button {
+            padding: 10px;
+            margin: 10px;
             border-radius: 5px;
-            animation: blink 1s infinite alternate;
-        }
-        .whatsapp {
-            background-color: green;
-            color: white;
-        }
-        .email {
-            background-color: blue;
-            color: white;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            100% { opacity: 0.5; }
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-    <h1>
-        <div class="marquee">⚽ MOE WEBSITE SPORTS LIVE ⚽</div>
-    </h1>
+    <h1>Moe VLC Online</h1>
+    
+    <input type="text" id="streamURL" placeholder="Weka link ya m3u8 hapa..." size="50">
+    <button onclick="loadStream()">Play Link</button>
+    
+    <br><br>
+    
+    <input type="file" id="fileInput" accept=".m3u8">
+    <button onclick="loadFile()">Play File</button>
 
-    <div class="intro">
-        <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" alt="Moe" class="profile-pic">
-        <p><strong>Karibu kwenye MOE SPORTS LIVE!</strong><br>
-        Tovuti hii imetengenezwa na <strong>Moe</strong> kwa ajili ya kutazama mechi mubashara. <br>
-        Chaneli nyingi mpya zitakuja hivi karibuni!</p>
-    </div>
-
-    <video id="player" controls autoplay></video>
-
-    <div class="button-container">
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232373.m3u8')">Bein Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232374.m3u8')">Bein Sports 6</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232388.m3u8')">Bein Sports 2</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 3</button>
-        <button class="btn btn-left" onclick="changeChannel('https://trests.3utilities.com:8181/memfs/3a34b9cb-983f-4bc8-851e-3b0a9150b05a_output_0.m3u8?session=d7UfeoDYQDcf5zzoLwK96Z')">ESPNSports</button>
-        <button class="btn btn-right" onclick="changeChannel('http://platform.topuphost.com:8577/live/alfajerhd.stream/playlist.m3u8')">Al Fajer HD</button>
-        <button class="btn btn-left" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">PS Stream</button>
-        <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1 HD</button>
-    </div>
-
-    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
-    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
+    <video id="player" controls></video>
 
     <script>
-        var video = document.getElementById('player');
-        var hls = new Hls();
+        function loadStream() {
+            var video = document.getElementById('player');
+            var streamURL = document.getElementById('streamURL').value;
 
-        function changeChannel(url) {
+            playVideo(streamURL, video);
+        }
+
+        function loadFile() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+            if (file) {
+                var fileURL = URL.createObjectURL(file);
+                playVideo(fileURL, document.getElementById('player'));
+            }
+        }
+
+        function playVideo(source, video) {
             if (Hls.isSupported()) {
-                hls.destroy();  // Safisha stream ya zamani
-                hls = new Hls();
-                hls.loadSource(url);
+                var hls = new Hls();
+                hls.loadSource(source);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.play();
                 });
-                hls.on(Hls.Events.ERROR, function(event, data) {
-                    if (data.fatal) {
-                        alert("Tatizo katika kucheza channel. Tafadhali jaribu tena.");
-                    }
-                });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.play();
-            } else {
-                alert("Samahani, browser yako haiwezi kucheza channel hii.");
+                video.src = source;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
             }
-        }
 
-        // Load default channel
-        changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232373.m3u8');
+            const player = new Plyr(video);
+        }
     </script>
 
 </body>
