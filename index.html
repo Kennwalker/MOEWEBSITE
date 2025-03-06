@@ -3,133 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moe VLC Online</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css">
+    <title>Moe 🏀Live ⚽Streaming</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
     <style>
         body {
-            text-align: center;
-            background-color: #121212;
+            background-color: black;
             color: white;
+            text-align: center;
             font-family: Arial, sans-serif;
+        }
+        marquee {
+            font-size: 20px;
+            color: yellow;
+            font-weight: bold;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .channel-btn {
+            display: block;
+            width: 80%;
+            margin: 5px auto;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .whatsapp, .email {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            animation: blink 1s infinite alternate;
+        }
+        .whatsapp {
+            background-color: #25D366;
+        }
+        .email {
+            background-color: #FF5733;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
         video {
             width: 90%;
             max-width: 800px;
-            border-radius: 10px;
             margin-top: 20px;
-        }
-        input, button {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .channel-list {
-            margin-top: 20px;
-        }
-        .channel-btn {
-            display: block;
-            background: #1DB954;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px auto;
-            width: 80%;
-            max-width: 300px;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <h1>Moe 🏀Live ⚽️Streaming</h1>
-    
-    <input type="text" id="streamURL" placeholder="Weka link ya m3u8 hapa..." size="50">
-    <button onclick="loadM3U8()">Load Channels</button>
+    <marquee>Moe 🏀Live ⚽Streaming - Pakia file au weka link ya m3u8</marquee>
+
+    <input type="text" id="m3u8Link" placeholder="Weka link ya m3u8 hapa...">
+    <button onclick="loadFromLink()">Load Channels</button>
+
+    <input type="file" id="m3u8File">
+    <button onclick="uploadM3U8()">Upload M3U8 File</button>
+
+    <div id="channels"></div>
+
+    <video id="videoPlayer" controls></video>
 
     <br><br>
-    
-    <input type="file" id="fileInput" accept=".m3u8">
-    <button onclick="loadM3U8File()">Upload M3U8 File</button>
-
-    <div class="channel-list" id="channelList"></div>
-
-    <video id="player" controls></video>
+    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="whatsapp">WhatsApp</a>
+    <a href="mailto:moehafsathy@myyahoo.com" class="email">Email</a>
 
     <script>
-        function loadM3U8() {
-            var streamURL = document.getElementById('streamURL').value;
-            fetch(streamURL)
-                .then(response => response.text())
-                .then(data => processM3U8(data))
-                .catch(error => alert("Imeshindikana kusoma m3u8: " + error));
+        let player = document.getElementById('videoPlayer');
+        
+        function loadFromLink() {
+            let url = document.getElementById('m3u8Link').value;
+            playStream(url);
         }
 
-        function loadM3U8File() {
-            var fileInput = document.getElementById('fileInput');
-            var file = fileInput.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    processM3U8(e.target.result);
-                };
-                reader.readAsText(file);
-            }
-        }
+        function uploadM3U8() {
+            let file = document.getElementById('m3u8File').files[0];
+            if (!file) return;
+            
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                let lines = event.target.result.split("\n");
+                let channelsDiv = document.getElementById('channels');
+                channelsDiv.innerHTML = "";
 
-        function processM3U8(content) {
-            var lines = content.split("\n");
-            var channels = [];
-            var currentChannel = null;
-
-            lines.forEach(line => {
-                if (line.startsWith("#EXTINF")) {
-                    currentChannel = line.split(",")[1]?.trim();
-                } else if (line.startsWith("http")) {
-                    if (currentChannel) {
-                        channels.push({ name: currentChannel, url: line.trim() });
-                        currentChannel = null;
+                for (let i = 0; i < lines.length; i++) {
+                    if (lines[i].startsWith("http")) {
+                        let btn = document.createElement('button');
+                        btn.innerText = `Channel ${i}`;
+                        btn.className = "channel-btn";
+                        btn.onclick = () => playStream(lines[i]);
+                        channelsDiv.appendChild(btn);
                     }
                 }
-            });
-
-            displayChannels(channels);
+            };
+            reader.readAsText(file);
         }
 
-        function displayChannels(channels) {
-            var channelList = document.getElementById('channelList');
-            channelList.innerHTML = "";
-            channels.forEach(channel => {
-                var btn = document.createElement("button");
-                btn.className = "channel-btn";
-                btn.textContent = channel.name;
-                btn.onclick = function() {
-                    playVideo(channel.url);
-                };
-                channelList.appendChild(btn);
-            });
-        }
-
-        function playVideo(source) {
-            var video = document.getElementById('player');
-
+        function playStream(url) {
             if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(source);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = source;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play();
-                });
+                let hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(player);
+            } else {
+                player.src = url;
             }
-
-            new Plyr(video);
         }
     </script>
 
