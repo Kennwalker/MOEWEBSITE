@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moe streaming live VLC Online</title>
+    <title>Moe VLC Online</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
@@ -26,40 +26,95 @@
             border-radius: 5px;
             font-size: 16px;
         }
+        .channel-list {
+            margin-top: 20px;
+        }
+        .channel-btn {
+            display: block;
+            background: #1DB954;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px auto;
+            width: 80%;
+            max-width: 300px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Moe VLC Online</h1>
+    <h1>Moe 🏀Live ⚽️Streaming</h1>
     
     <input type="text" id="streamURL" placeholder="Weka link ya m3u8 hapa..." size="50">
-    <button onclick="loadStream()">Play Link</button>
-    
+    <button onclick="loadM3U8()">Load Channels</button>
+
     <br><br>
     
     <input type="file" id="fileInput" accept=".m3u8">
-    <button onclick="loadFile()">Play File</button>
+    <button onclick="loadM3U8File()">Upload M3U8 File</button>
+
+    <div class="channel-list" id="channelList"></div>
 
     <video id="player" controls></video>
 
     <script>
-        function loadStream() {
-            var video = document.getElementById('player');
+        function loadM3U8() {
             var streamURL = document.getElementById('streamURL').value;
-
-            playVideo(streamURL, video);
+            fetch(streamURL)
+                .then(response => response.text())
+                .then(data => processM3U8(data))
+                .catch(error => alert("Imeshindikana kusoma m3u8: " + error));
         }
 
-        function loadFile() {
+        function loadM3U8File() {
             var fileInput = document.getElementById('fileInput');
             var file = fileInput.files[0];
             if (file) {
-                var fileURL = URL.createObjectURL(file);
-                playVideo(fileURL, document.getElementById('player'));
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    processM3U8(e.target.result);
+                };
+                reader.readAsText(file);
             }
         }
 
-        function playVideo(source, video) {
+        function processM3U8(content) {
+            var lines = content.split("\n");
+            var channels = [];
+            var currentChannel = null;
+
+            lines.forEach(line => {
+                if (line.startsWith("#EXTINF")) {
+                    currentChannel = line.split(",")[1]?.trim();
+                } else if (line.startsWith("http")) {
+                    if (currentChannel) {
+                        channels.push({ name: currentChannel, url: line.trim() });
+                        currentChannel = null;
+                    }
+                }
+            });
+
+            displayChannels(channels);
+        }
+
+        function displayChannels(channels) {
+            var channelList = document.getElementById('channelList');
+            channelList.innerHTML = "";
+            channels.forEach(channel => {
+                var btn = document.createElement("button");
+                btn.className = "channel-btn";
+                btn.textContent = channel.name;
+                btn.onclick = function() {
+                    playVideo(channel.url);
+                };
+                channelList.appendChild(btn);
+            });
+        }
+
+        function playVideo(source) {
+            var video = document.getElementById('player');
+
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(source);
@@ -74,7 +129,7 @@
                 });
             }
 
-            const player = new Plyr(video);
+            new Plyr(video);
         }
     </script>
 
