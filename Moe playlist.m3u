@@ -1,0 +1,43 @@
+#EXTM3U
+
+#EXTINF:-1,Bein Sports 1
+http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8
+
+#EXTINF:-1,Bein Sports 2
+http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8
+
+#EXTINF:-1,Bein Sports 3
+http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8
+
+#EXTINF:-1,Bein Sports 4
+http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8
+
+#EXTINF:-1,TNT Sports 1
+http://lionshd.me:80/live/052999069955/226617690863/180008.m3u8
+
+#EXTINF:-1,TNT Sports 2
+http://lionshd.me:80/live/052999069955/226617690863/180007.m3u8
+
+#EXTINF:-1,TNT Sports 3
+http://lionshd.me:80/live/052999069955/226617690863/180006.m3u8
+
+#EXTINF:-1,TNT Sports 4
+http://lionshd.me:80/live/052999069955/226617690863/180010.m3u8
+
+#EXTINF:-1,ESPN Sports
+http://lionshd.me:80/live/052999069955/226617690863/180009.m3u8
+
+#EXTINF:-1,SSC Sports 1
+http://lionshd.me:80/live/052999069955/226617690863/310944.m3u8
+
+#EXTINF:-1,SSC Sports 2
+http://lionshd.me:80/live/052999069955/226617690863/176644.m3u8
+
+#EXTINF:-1,Super Sport 1
+http://moontoolsplayer.me:8080/live/Tonyt72/t0n1t72/1174989.m3u8
+
+#EXTINF:-1,P-Sports
+https://spstr.abntv.live/hls/psstream.m3u8
+
+#EXTINF:-1,Azam Sports 1
+https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8
