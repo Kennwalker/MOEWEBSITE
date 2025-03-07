@@ -1,55 +1,159 @@
-import { useState } from "react";
-import ReactPlayer from "react-player";
-import { Input, Button } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚽ MOE SPORTS LIVE ⚽</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: marquee 10s linear infinite;
+            font-size: 28px;
+            font-weight: bold;
+            color: yellow;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        video {
+            width: 90%;
+            height: 300px;
+            border: 3px solid red;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .btn {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 30px;
+            transition: background 0.3s;
+            width: 200px;
+            font-weight: bold;
+        }
+        .btn-left {
+            background: white;
+            color: black;
+        }
+        .btn-left:hover {
+            background: #e0e0e0;
+        }
+        .btn-right {
+            background: green;
+            color: white;
+        }
+        .btn-right:hover {
+            background: darkgreen;
+        }
+        .contact-btn {
+            font-size: 22px;
+            font-weight: bold;
+            padding: 15px;
+            width: 90%;
+            margin: 10px auto;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            animation: blink 1s infinite alternate;
+        }
+        .whatsapp {
+            background-color: green;
+            color: white;
+        }
+        .email {
+            background-color: blue;
+            color: white;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
 
-export default function IPTVPlayer() {
-  const [url, setUrl] = useState("");
-  const [inputUrl, setInputUrl] = useState("");
-  const [channels, setChannels] = useState([
-    { name: "Bein Sports 1", url: "http://example.com/stream1.m3u8" },
-    { name: "Bein Sports 2", url: "http://example.com/stream2.m3u8" },
-    { name: "ESPN", url: "http://example.com/stream3.m3u8" },
-  ]);
+    <h1><div class="marquee">⚽ MOE WEBSITE SPORTS LIVE ⚽</div></h1>
 
-  const loadChannel = (channelUrl) => {
-    setUrl(channelUrl);
-  };
+    <video id="player" controls autoplay></video>
 
-  return (
-    <div className="flex flex-col items-center p-4 bg-gray-900 text-white min-h-screen">
-      <h1 className="text-3xl font-bold mb-4">MOE IPTV Player</h1>
-      <Card className="w-full max-w-2xl">
-        <CardContent>
-          <ReactPlayer
-            url={url}
-            controls
-            playing
-            width="100%"
-            height="400px"
-          />
-          <div className="mt-4 flex gap-2">
-            <Input
-              placeholder="Enter M3U8 URL"
-              value={inputUrl}
-              onChange={(e) => setInputUrl(e.target.value)}
-            />
-            <Button onClick={() => loadChannel(inputUrl)}>Load</Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="mt-6 grid grid-cols-2 gap-4">
-        {channels.map((channel, index) => (
-          <Button
-            key={index}
-            onClick={() => loadChannel(channel.url)}
-            className="w-full bg-blue-600 hover:bg-blue-700"
-          >
-            {channel.name}
-          </Button>
-        ))}
-      </div>
+    <div>
+         class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 2</button>
+        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 3</button>
+        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 4</button>
+        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180008.m3u8')">TNT Sports 1</button>
+        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180007.m3u8')">TNT Sports 2</button>
+        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180006.m3u8')">TNT Sports 3</button>
+        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180010.m3u8')">TNT Sports 4</button>
+        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180009.m3u8')">ESPN Sports</button>
+        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/310944.m3u8')">SSC Sports 1</button>
+        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/176644.m3u8')">SSC Sports 2</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/Tonyt72/t0n1t72/1174989.m3u8')">Super Sport 1</button>
+        <button class="btn btn-left" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
+        <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
     </div>
-  );
-}
+
+    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
+    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
+
+    <script>
+        function playStream(url) {
+            var video = document.getElementById('player');
+
+            // Safisha video ili uanze upya
+            video.pause();
+            video.src = "";
+            video.load();
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    console.error("HLS.js Error:", data);
+                    alert("Samahani, channel haichezi. Jaribu nyingine.");
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.addEventListener('loadedmetadata', function () {
+                    video.play();
+                });
+                video.onerror = function () {
+                    alert("Samahani, channel haichezi. Jaribu nyingine.");
+                };
+            } else {
+                alert("Samahani, browser yako haikubali video hizi.");
+            }
+        }
+
+        function changeChannel(url) {
+            playStream(url);
+        }
+
+        // Load default channel on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            playStream('http://magott.net:80/morad-assurance/29KQUPABHs/23');
+        });
+    </script>
+
+</body>
+</html>
