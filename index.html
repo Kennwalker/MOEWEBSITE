@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚽ MOE SPORTS LIVE ⚽</title>
+    <title>MOE SPORTS LIVE ⚽</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #000;
+            color: #fff;
             text-align: center;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         .marquee {
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: marquee 10s linear infinite;
-            font-size: 28px;
+            width: 100%;
+            font-size: 24px;
             font-weight: bold;
             color: yellow;
+            background: red;
+            padding: 10px 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .marquee span {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
         }
         @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
         video {
             width: 90%;
             height: 300px;
             border: 3px solid red;
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 60px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         .btn {
+            display: inline-block;
             padding: 12px 20px;
             margin: 5px;
             border: none;
@@ -45,23 +55,14 @@
             transition: background 0.3s;
             width: 200px;
             font-weight: bold;
+            text-transform: uppercase;
         }
-        .btn-left {
-            background: white;
-            color: black;
-        }
-        .btn-left:hover {
-            background: #e0e0e0;
-        }
-        .btn-right {
-            background: green;
-            color: white;
-        }
-        .btn-right:hover {
-            background: darkgreen;
-        }
+        .btn-left { background: white; color: black; }
+        .btn-left:hover { background: #e0e0e0; }
+        .btn-right { background: green; color: white; }
+        .btn-right:hover { background: darkgreen; }
         .contact-btn {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             padding: 15px;
             width: 90%;
@@ -70,30 +71,21 @@
             text-decoration: none;
             text-align: center;
             border-radius: 5px;
+            color: white;
+            background: green;
             animation: blink 1s infinite alternate;
         }
-        .whatsapp {
-            background-color: green;
-            color: white;
-        }
-        .email {
-            background-color: blue;
-            color: white;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
+        @keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
 </head>
 <body>
 
-    <h1><div class="marquee">⚽ MOE WEBSITE SPORTS LIVE ⚽</div></h1>
+    <div class="marquee"><span>⚽ MOE SPORTS LIVE - BURUDANI KAMILI ⚽</span></div>
 
     <video id="player" controls autoplay></video>
 
     <div>
-         class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1</button>
+        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1</button>
         <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 2</button>
         <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 3</button>
         <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 4</button>
@@ -109,8 +101,8 @@
         <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
     </div>
 
-    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn whatsapp">WhatsApp</a>
-    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn email">Email</a>
+    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn">📲 WhatsApp</a>
+    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn" style="background: blue;">📩 Email</a>
 
     <script>
         function playStream(url) {
@@ -128,20 +120,11 @@
                 hls.on(Hls.Events.MANIFEST_PARSED, function () {
                     video.play();
                 });
-                hls.on(Hls.Events.ERROR, function (event, data) {
-                    console.error("HLS.js Error:", data);
-                    alert("Samahani, channel haichezi. Jaribu nyingine.");
-                });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
                 video.addEventListener('loadedmetadata', function () {
                     video.play();
                 });
-                video.onerror = function () {
-                    alert("Samahani, channel haichezi. Jaribu nyingine.");
-                };
-            } else {
-                alert("Samahani, browser yako haikubali video hizi.");
             }
         }
 
