@@ -13,6 +13,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
         .marquee {
             width: 100%;
@@ -76,43 +77,41 @@
             animation: blink 1s infinite alternate;
         }
         @keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.5; } }
+        .floating-image {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            animation: floatAround 10s infinite linear;
+        }
+        @keyframes floatAround {
+            0% { top: 5%; left: 5%; }
+            25% { top: 80%; left: 10%; }
+            50% { top: 50%; left: 80%; }
+            75% { top: 20%; left: 30%; }
+            100% { top: 5%; left: 5%; }
+        }
     </style>
 </head>
 <body>
-
     <div class="marquee"><span>⚽ MOE SPORTS LIVE - BURUDANI KAMILI ⚽</span></div>
-
+    <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" class="floating-image" alt="Moe">
     <video id="player" controls autoplay></video>
-
     <div>
-        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 2</button>
-        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 3</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 4</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180008.m3u8')">TNT Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180007.m3u8')">TNT Sports 2</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180006.m3u8')">TNT Sports 3</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180010.m3u8')">TNT Sports 4</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/180009.m3u8')">ESPN Sports</button>
-        <button class="btn btn-right" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/310944.m3u8')">SSC Sports 1</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/176644.m3u8')">SSC Sports 2</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/Tonyt72/t0n1t72/1174989.m3u8')">Super Sport 1</button>
-        <button class="btn btn-left" onclick="changeChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
-        <button class="btn btn-right" onclick="changeChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
+        <button class="btn btn-left" onclick="changeChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')">Bein Sports 1</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1 (Old)</button>
+        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 2</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 3</button>
+        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 4</button>
     </div>
-
     <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn">📲 WhatsApp</a>
     <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn" style="background: blue;">📩 Email</a>
-
     <script>
         function playStream(url) {
             var video = document.getElementById('player');
-
-            // Safisha video ili uanze upya
             video.pause();
             video.src = "";
             video.load();
-
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.loadSource(url);
@@ -127,16 +126,12 @@
                 });
             }
         }
-
         function changeChannel(url) {
             playStream(url);
         }
-
-        // Load default channel on page load
         document.addEventListener("DOMContentLoaded", function () {
             playStream('http://magott.net:80/morad-assurance/29KQUPABHs/23');
         });
     </script>
-
 </body>
 </html>
