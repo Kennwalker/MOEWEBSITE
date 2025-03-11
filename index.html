@@ -78,31 +78,29 @@
         }
         @keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.5; } }
         .floating-image {
-            position: fixed;
+            position: absolute;
             width: 100px;
-            height: 100px;
             border-radius: 50%;
             animation: floatAround 10s infinite linear;
         }
         @keyframes floatAround {
-            0% { top: 5%; left: 5%; }
-            25% { top: 80%; left: 10%; }
-            50% { top: 50%; left: 80%; }
-            75% { top: 20%; left: 30%; }
-            100% { top: 5%; left: 5%; }
+            0% { top: 0; left: 0; }
+            25% { top: 0; left: 80%; }
+            50% { top: 80%; left: 80%; }
+            75% { top: 80%; left: 0; }
+            100% { top: 0; left: 0; }
         }
     </style>
 </head>
 <body>
     <div class="marquee"><span>⚽ MOE SPORTS LIVE - BURUDANI KAMILI ⚽</span></div>
-    <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" class="floating-image" alt="Moe">
+    <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" class="floating-image">
     <video id="player" controls autoplay></video>
     <div>
         <button class="btn btn-left" onclick="changeChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')">Bein Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 1 (Old)</button>
-        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 2</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 3</button>
-        <button class="btn btn-left" onclick="changeChannel('http://lionshd.me:80/live/052999069955/226617690863/232376.m3u8')">Bein Sports 4</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 2</button>
+        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 3</button>
+        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 4</button>
     </div>
     <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn">📲 WhatsApp</a>
     <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn" style="background: blue;">📩 Email</a>
@@ -130,7 +128,7 @@
             playStream(url);
         }
         document.addEventListener("DOMContentLoaded", function () {
-            playStream('http://magott.net:80/morad-assurance/29KQUPABHs/23');
+            playStream('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8');
         });
     </script>
 </body>
