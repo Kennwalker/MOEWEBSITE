@@ -84,62 +84,60 @@
     <br>
     <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" alt="Moe's Image">
     <br>
+    
     <div class="video-container">
         <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
     </div>
+
     <div class="channel-list">
-        <button onclick="playChannel('https://customer-1tudsc2cfg8pm992.cloudflarestream.com/51bb03f51644974b8137cd0ee2a325f7/manifest/stream_td0ebac6bcef1e0ff7be5a9bd3b40356a_r990441448.m3u8?useVODOTFE=false&llhlsHBs=0.9')">Azam Sports 1</button>
+        <button onclick="playChannel(latestAzamLink)">Azam Sports 1</button>
         <button onclick="playChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')">Bein Sports 1</button>
         <button onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
     </div>
-    const videoPlayer = document.getElementById("videoPlayer");
 
-// Function to fetch the latest stream link
-templateUrl = "https://customer-1tudsc2cfg8pm992.cloudflarestream.com/51bb03f51644974b8137cd0ee2a325f7/manifest/";
-
-async function getLatestStream() {
-    try {
-        // Fetch the current valid stream link dynamically
-        const response = await fetch(templateUrl);
-        if (!response.ok) {
-            throw new Error("Failed to fetch stream URL");
-        }
-        
-        // Extract the updated stream link
-        const streamData = await response.text();
-        const match = streamData.match(/stream_t\w+_r\d+/); // Extracts dynamic stream ID
-        
-        if (match) {
-            const newStream = match[0];
-            const newUrl = `${templateUrl}${newStream}.m3u8?useVODOTFE=false&llhlsHBs=0.9`;
-            
-            // Set the new stream URL in the player
-            videoPlayer.src = newUrl;
-            videoPlayer.load();
-            videoPlayer.play();
-        } else {
-            console.error("No valid stream found");
-        }
-    } catch (error) {
-        console.error("Error fetching latest stream:", error);
-    }
-}
-
-// Fetch a new stream every 5 minutes (since links update per half-time or session)
-setInterval(getLatestStream, 300000);
-
-// Load the first stream immediately on page load
-getLatestStream();
-
-    
     <div class="contact">
         <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="whatsapp">WhatsApp</a>
         <a href="mailto:moehafsathy@myyahoo.com" class="email">Email</a>
     </div>
+
     <script>
+        let latestAzamLink = "https://customer-1tudsc2cfg8pm992.cloudflarestream.com/51bb03f51644974b8137cd0ee2a325f7/manifest/stream_td0ebac6bcef1e0ff7be5a9bd3b40356a_r990441448.m3u8?useVODOTFE=false&llhlsHBs=0.9";
+
         function playChannel(url) {
             document.getElementById('videoPlayer').src = url;
         }
+
+        async function getLatestStream() {
+            try {
+                const response = await fetch("https://customer-1tudsc2cfg8pm992.cloudflarestream.com/51bb03f51644974b8137cd0ee2a325f7/manifest/");
+                
+                if (!response.ok) {
+                    throw new Error("Failed to fetch stream URL");
+                }
+
+                const streamData = await response.text();
+                const match = streamData.match(/stream_t\w+_r\d+/); 
+
+                if (match) {
+                    latestAzamLink = `https://customer-1tudsc2cfg8pm992.cloudflarestream.com/51bb03f51644974b8137cd0ee2a325f7/manifest/${match[0]}.m3u8?useVODOTFE=false&llhlsHBs=0.9`;
+                    
+                    // Auto-update the video player if it's playing Azam Sports 1
+                    if (document.getElementById('videoPlayer').src.includes("customer-1tudsc2cfg8pm992.cloudflarestream.com")) {
+                        playChannel(latestAzamLink);
+                    }
+                } else {
+                    console.error("No valid stream found");
+                }
+            } catch (error) {
+                console.error("Error fetching latest stream:", error);
+            }
+        }
+
+        // Fetch new stream link every 5 minutes
+        setInterval(getLatestStream, 300000);
+
+        // Load first stream immediately
+        getLatestStream();
     </script>
 </body>
 </html>
