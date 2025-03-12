@@ -1,135 +1,105 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOE SPORTS LIVE ⚽</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
+            text-align: center;
         }
         .marquee {
-            width: 100%;
             font-size: 24px;
             font-weight: bold;
             color: yellow;
-            background: red;
-            padding: 10px 0;
-            overflow: hidden;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
+            animation: colorChange 5s infinite alternate;
         }
-        .marquee span {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 10s linear infinite;
+        @keyframes colorChange {
+            0% { color: yellow; }
+            50% { color: red; }
+            100% { color: green; }
         }
-        @keyframes marquee {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
         }
-        video {
-            width: 90%;
-            height: 300px;
-            border: 3px solid red;
-            border-radius: 10px;
-            margin-top: 60px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            margin: 5px;
+        .video-container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+        }
+        .channel-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+        .channel-list button {
+            background: #333;
+            color: white;
+            padding: 10px;
             border: none;
             cursor: pointer;
-            font-size: 18px;
-            border-radius: 30px;
-            transition: background 0.3s;
-            width: 200px;
-            font-weight: bold;
-            text-transform: uppercase;
+            border-radius: 5px;
         }
-        .btn-left { background: white; color: black; }
-        .btn-left:hover { background: #e0e0e0; }
-        .btn-right { background: green; color: white; }
-        .btn-right:hover { background: darkgreen; }
-        .contact-btn {
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px;
-            width: 90%;
-            margin: 10px auto;
+        .contact {
+            margin-top: 20px;
+        }
+        .contact a {
             display: block;
+            padding: 10px;
+            margin: 10px auto;
+            width: 200px;
+            color: white;
             text-decoration: none;
             text-align: center;
+            font-size: 18px;
+            font-weight: bold;
             border-radius: 5px;
-            color: white;
-            background: green;
             animation: blink 1s infinite alternate;
         }
-        @keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.5; } }
-        .floating-image {
-            position: absolute;
-            width: 100px;
-            border-radius: 50%;
-            animation: floatAround 10s infinite linear;
-        }
-        @keyframes floatAround {
-            0% { top: 0; left: 0; }
-            25% { top: 0; left: 80%; }
-            50% { top: 80%; left: 80%; }
-            75% { top: 80%; left: 0; }
-            100% { top: 0; left: 0; }
+        .whatsapp { background: green; }
+        .email { background: red; }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
     </style>
 </head>
 <body>
-    <div class="marquee"><span>⚽ MOE SPORTS LIVE - BURUDANI KAMILI ⚽</span></div>
-    <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" class="floating-image">
-    <video id="player" controls autoplay></video>
-    <div>
-        <button class="btn btn-left" onclick="changeChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')">Bein Sports 1</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">Bein Sports 2</button>
-        <button class="btn btn-left" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175015.m3u8')">Bein Sports 3</button>
-        <button class="btn btn-right" onclick="changeChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175016.m3u8')">Bein Sports 4</button>
+    <marquee class="marquee">Welcome to MOE SPORTS LIVE ⚽ - Your Home for Live Sports Streaming!</marquee>
+    <br>
+    <img src="https://i.postimg.cc/WbJnHzrq/IMG-4230.jpg" alt="Moe's Image">
+    <br>
+    <div class="video-container">
+        <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
     </div>
-    <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="contact-btn">📲 WhatsApp</a>
-    <a href="mailto:moehafsathy@myyahoo.com" class="contact-btn" style="background: blue;">📩 Email</a>
+    <div class="channel-list">
+        <button onclick="playChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
+        <button onclick="playChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')">Bein Sports 1</button>
+        <button onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
+    </div>
+    <div class="contact">
+        <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="whatsapp">WhatsApp</a>
+        <a href="mailto:moehafsathy@myyahoo.com" class="email">Email</a>
+    </div>
     <script>
-        function playStream(url) {
-            var video = document.getElementById('player');
-            video.pause();
-            video.src = "";
-            video.load();
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-            }
+        function playChannel(url) {
+            document.getElementById('videoPlayer').src = url;
         }
-        function changeChannel(url) {
-            playStream(url);
-        }
-        document.addEventListener("DOMContentLoaded", function () {
-            playStream('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8');
-        });
     </script>
 </body>
 </html>
