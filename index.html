@@ -41,11 +41,11 @@
             height: 450px;
         }
         .channel-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin: 20px;
+            margin: 20px auto;
+            max-width: 800px;
         }
         .channel-list button {
             background: #333;
@@ -133,7 +133,6 @@
                         latestAzamLink = newLink;
                         console.log("New stream link found:", latestAzamLink);
                         
-                        // Kama Azam Sports 1 inacheza, basi inabadilisha link
                         if (document.getElementById('videoPlayer').src.includes("customer-1tudsc2cfg8pm992.cloudflarestream.com")) {
                             playChannel(latestAzamLink);
                         }
@@ -146,10 +145,7 @@
             }
         }
 
-        // Fetch new stream link every 5 minutes
         setInterval(getLatestStream, 300000);
-
-        // Load first stream immediately
         getLatestStream();
     </script>
 </body>
