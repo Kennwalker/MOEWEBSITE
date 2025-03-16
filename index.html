@@ -101,22 +101,41 @@
     </div>
 
     <div class="channel-list">
-        <button onclick="playChannel(latestAzamLink)"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Azam_Sports.png">Azam Sports 1</button>
-        <button onclick="playChannel('https://wo.cma.footballii.ir/hls2/b1_mid.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png">Bein Sports 1</button>
-        <button onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/P-Sports_Logo.png">P-Sports</button>
-        <button onclick="playChannel('https://cma.footballii.ir/hls2/b1.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png">Bein Sports</button>
-        <button onclick="playChannel('https://dffgtrde.vffddd.online/bein2/index.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png">Bein Sports 2</button>
-        <button onclick="playChannel('https://dffgtrdb.vffddd.online:443/bein3/tracks-v1a1/mono.ts.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png">Bein Sports 3</button>
-        <button onclick="playChannel('https://sss.vffddd.online:443/bein4/tracks-v1a1/mono.ts.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png">Bein Sports 4</button>
-        <button onclick="playChannel('https://stream.sainaertebat.com/hls2/solhtv.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Solh_TV_logo.png">Solh Tv</button>
-        <button onclick="playChannel('https://stream.live12.ir/hls2/ssc1.m3u8?token=https://t.me/ABTVAB')"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/SSC_logo.png">SSC 1</button>
-        <button onclick="playChannel('https://wo.cma.footballii.ir/hls2/broken2.m3u8')"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_logo.png">ESPN Sport</button>
+        <button onclick="playChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Azam_Sports.png"> Azam Sports 1
+        </button>
+        <button onclick="playChannel('http://moontoolsplayer.me:8080/live/war2rodri/eWfQ3GgvrvFf/1175014.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png"> Bein Sports 1
+        </button>
+        <button onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/P-Sports_Logo.png"> P-Sports
+        </button>
+        <button onclick="playChannel('http://lionshd.me:80/live/052999069955/226617690863/180008.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png"> Bein Sports 2
+        </button>
+        <button onclick="playChannel('http://lionshd.me:80/live/052999069955/226617690863/180007.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png"> Bein Sports 3
+        </button>
+        <button onclick="playChannel('http://lionshd.me:80/live/052999069955/226617690863/180006.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Bein_Sports_logo.png"> Bein Sports 4
+        </button>
+        <button onclick="playChannel('http://lionshd.me:80/live/052999069955/226617690863/180009.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_logo.png"> ESPN Sport
+        </button>
+        <button onclick="playChannel('http://lionshd.me:80/live/052999069955/226617690863/310944.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/SSC_logo.png"> SSC 1
+        </button>
     </div>
 
     <div class="contact">
         <a href="https://wa.me/message/HEYNTN2KD6K7O1" class="whatsapp">WhatsApp</a>
         <a href="mailto:moehafsathy@myyahoo.com" class="email">Email</a>
     </div>
-</body>
 
+    <script>
+        function playChannel(url) {
+            document.getElementById("videoPlayer").src = url;
+        }
+    </script>
+</body>
 </html>
