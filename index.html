@@ -23,11 +23,17 @@
             100% { color: green; }
         }
         .profile-img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            margin: 10px auto;
+            border: 3px solid red;
+            animation: rotate 3s linear infinite;
             display: block;
+            margin: 10px auto;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .video-container {
             margin: 20px auto;
@@ -77,7 +83,7 @@
 <body>
     <marquee class="marquee">Welcome to MOE SPORTS LIVE ⚽ - Your Home for Live Sports Streaming!</marquee>
 
-    <img class="profile-img" src="https://i.ibb.co/WbJnHzrq/IMG-4230.jpg" alt="Moe's Profile">
+    <img class="profile-img" src="https://i.postimg.cc/D0vbjsz4/IMG-4230.jpg" alt="Moe's Profile">
     
     <div class="video-container">
         <video id="videoPlayer" controls></video>
@@ -85,39 +91,39 @@
 
     <div class="channel-list">
         <div class="channel" onclick="playChannel('https://cma.footballii.ir/hls2/b1.m3u8')">
-            <img src="https://i.ibb.co/5xqcXKr/bein1.png" alt="Bein 1">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="Bein 1">
             <span>Bein Sports 1</span>
         </div>
         <div class="channel" onclick="playChannel('https://wo.cma.footballii.ir:443/hls2/b2_high.m3u8')">
-            <img src="https://i.ibb.co/6YXgyGg/bein2.png" alt="Bein 2">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="Bein 2">
             <span>Bein Sports 2</span>
         </div>
         <div class="channel" onclick="playChannel('http://mo3ad.xyz/HMAwWYPc3t/2Rdj8W5fFT/7')">
-            <img src="https://i.ibb.co/WVV67yH/bein3.png" alt="Bein 3">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="Bein 3">
             <span>Bein Sports 3</span>
         </div>
         <div class="channel" onclick="playChannel('http://humsab.xyz/IN_E4/index.m3u8')">
-            <img src="https://i.ibb.co/sWkFmn7/bein4.png" alt="Bein 4">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="Bein 4">
             <span>Bein Sports 4</span>
         </div>
         <div class="channel" onclick="playChannel('https://stream.sainaertebat.com/hls2/ssc1.m3u8?token=https://t.me/ABTVAB')">
-            <img src="https://i.ibb.co/qFhJX7h/ssc1.png" alt="SSC 1">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="SSC 1">
             <span>SSC 1</span>
         </div>
         <div class="channel" onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">
-            <img src="https://i.ibb.co/PxXCRNY/psports.png" alt="P-Sports">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="P-Sports">
             <span>P-Sports</span>
         </div>
         <div class="channel" onclick="playChannel('https://wo.cma.footballii.ir/hls2/broken2.m3u8')">
-            <img src="https://i.ibb.co/nmX4YZk/espn.png" alt="ESPN">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="ESPN">
             <span>ESPN Sport</span>
         </div>
         <div class="channel" onclick="playChannel('https://stream.sainaertebat.com/hls2/solhtv.m3u8')">
-            <img src="https://i.ibb.co/Nt5ds0Y/solh-tv.png" alt="Solh TV">
+            <img src="https://i.postimg.cc/8z0B7yzK/IMG-7824.jpg" alt="Solh TV">
             <span>Solh TV</span>
         </div>
         <div class="channel" onclick="playChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">
-            <img src="https://i.ibb.co/xLwGzsw/azam.png" alt="Azam">
+            <img src="https://i.postimg.cc/x1cLVK3K/IMG-7826.jpg" alt="Azam">
             <span>Azam Sports 1</span>
         </div>
     </div>
