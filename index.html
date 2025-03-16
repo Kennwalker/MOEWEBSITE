@@ -40,21 +40,37 @@
             border-radius: 10px;
         }
         .channel-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
             margin: 20px;
         }
-        .channel-list button {
+        .channel {
+            width: 300px;
+            height: 80px;
             background: #333;
-            color: white;
-            padding: 15px;
-            border: none;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
             border-radius: 10px;
-            font-size: 16px;
-            width: 100%;
-            height: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .channel:hover {
+            background: #555;
+        }
+        .channel img {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+        .channel span {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
         }
         .contact {
             margin-top: 20px;
@@ -85,16 +101,42 @@
     </div>
 
     <div class="channel-list">
-        <button onclick="playChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">Azam Sports 1</button>
-        <button onclick="playChannel('https://cma.footballii.ir/hls2/b1.m3u8')">Bein Sports 1</button>
-        <button onclick="playChannel('https://wo.cma.footballii.ir:443/hls2/b2_high.m3u8')">Bein Sports 2</button>
-        <button onclick="playChannel('http://mo3ad.xyz/HMAwWYPc3t/2Rdj8W5fFT/7')">Bein Sports 3</button>
-        <button onclick="playChannel('http://humsab.xyz/IN_E4/index.m3u8')">Bein Sports 4</button>
-        <button onclick="playChannel('https://stream.sainaertebat.com/hls2/ssc1.m3u8?token=https://t.me/ABTVAB')">SSC 1</button>
-        <button onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">P-Sports</button>
-        <button onclick="playChannel('https://stream.live12.ir/hls2/ssc1.m3u8?token=https://t.me/ABTVAB')">SSC 2</button>
-        <button onclick="playChannel('https://wo.cma.footballii.ir/hls2/broken2.m3u8')">ESPN Sport</button>
-        <button onclick="playChannel('https://stream.sainaertebat.com/hls2/solhtv.m3u8')">Solh TV</button>
+        <div class="channel" onclick="playChannel('https://cma.footballii.ir/hls2/b1.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bein_Sports_logo.png" alt="Bein 1">
+            <span>Bein Sports 1</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://wo.cma.footballii.ir:443/hls2/b2_high.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bein_Sports_logo.png" alt="Bein 2">
+            <span>Bein Sports 2</span>
+        </div>
+        <div class="channel" onclick="playChannel('http://mo3ad.xyz/HMAwWYPc3t/2Rdj8W5fFT/7')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bein_Sports_logo.png" alt="Bein 3">
+            <span>Bein Sports 3</span>
+        </div>
+        <div class="channel" onclick="playChannel('http://humsab.xyz/IN_E4/index.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bein_Sports_logo.png" alt="Bein 4">
+            <span>Bein Sports 4</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://stream.sainaertebat.com/hls2/ssc1.m3u8?token=https://t.me/ABTVAB')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Saudi_Sports_Company.png" alt="SSC 1">
+            <span>SSC 1</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://spstr.abntv.live/hls/psstream.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/P_Sports.png" alt="P-Sports">
+            <span>P-Sports</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://wo.cma.footballii.ir/hls2/broken2.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/5f/ESPN_logo.svg" alt="ESPN">
+            <span>ESPN Sport</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://stream.sainaertebat.com/hls2/solhtv.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/2/21/Solh_TV_Logo.png" alt="Solh TV">
+            <span>Solh TV</span>
+        </div>
+        <div class="channel" onclick="playChannel('https://vz-1bb50f2e-8ea.b-cdn.net/575983a6-ce24-4995-a8f3-18aeb3dc35df/240p/video.m3u8')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/c/c2/AzamTV_logo.png" alt="Azam">
+            <span>Azam Sports 1</span>
+        </div>
     </div>
 
     <div class="contact">
